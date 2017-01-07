@@ -20,6 +20,6 @@ class Normalizer(object):
         #cv2.imwrite("normbf.jpg", normalized_bf)
         #cv2.imwrite("normgfp.jpg",normalized_gfp)
         #cv2.imwrite("merged.jpg", cv2.merge((normalized_bf,normalized_gfp)))
-        return Image(normalized_bf,normalized_gfp)
+        return Image(normalized_bf,normalized_gfp,self.image.name)
 
     

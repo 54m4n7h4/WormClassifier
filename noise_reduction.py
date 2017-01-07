@@ -23,4 +23,4 @@ class NoiseReducer(object):
         bf = cv2.medianBlur(bf,kernel_size)
         gfp = cv2.medianBlur(gfp,kernel_size)
 
-        return Image(bf,gfp)
+        return Image(bf,gfp,self.image.name)

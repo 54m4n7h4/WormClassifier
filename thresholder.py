@@ -14,28 +14,28 @@ class Thresholder(object):
         bf = self.__threshold(self.img.read_bright_field(),trig,maxVal,cv2.THRESH_BINARY)
         gfp = self.__threshold(self.img.read_gfp(),trig,maxVal,cv2.THRESH_BINARY)
 
-        return Image(bf,gfp)
+        return Image(bf,gfp,self.img.name)
 
     def binary_threshold_inverse(self,trig,maxVal):
         bf = self.__threshold(self.img.read_bright_field(),trig,maxVal,cv2.THRESH_BINARY_INV)
         gfp = self.__threshold(self.img.read_gfp(),trig,maxVal,cv2.THRESH_BINARY_INV)
 
-        return Image(bf,gfp)
+        return Image(bf,gfp,self.img.name)
         
     def truncate_threshold(self,trig,maxVal):
         bf = self.__threshold(self.img.read_bright_field(),trig,maxVal,cv2.THRESH_TRUNC)
         gfp = self.__threshold(self.img.read_gfp(),trig,maxVal,cv2.THRESH_TRUNC)
 
-        return Image(bf,gfp)
+        return Image(bf,gfp,self.img.name)
 
     def zero_threshold(self,trig,maxVal):
         bf = self.__threshold(self.img.read_bright_field(),trig,maxVal,cv2.THRESH_TOZERO)
         gfp = self.__threshold(self.img.read_gfp(),trig,maxVal,cv2.THRESH_TOZERO)
 
-        return Image(bf,gfp)
+        return Image(bf,gfp,self.img.name)
     
     def zero_threshold_inverse(self,trig,maxVal):
         bf = self.__threshold(self.img.read_bright_field(),trig,maxVal,cv2.THRESH_TOZERO_INV)
         gfp = self.__threshold(self.img.read_gfp(),trig,maxVal,cv2.THRESH_TOZERO_INV)
 
-        return Image(bf,gfp)
+        return Image(bf,gfp,self.img.name)

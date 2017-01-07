@@ -10,14 +10,14 @@ class ImageRegion(object):
         bf = image.read_bright_field()
         gfp = image.read_gfp()
 
-        cannybf = cv2.Canny(bf,thresh1,thresh2)
-        cannygfp = cv2.Canny(gfp,thresh1, thresh2)
+        cannybf = cv2.Canny(bf,thresh1,thresh2,1)
+        cannygfp = cv2.Canny(gfp,thresh1, thresh2,1)
 
-        self.image = Image(cannybf,cannygfp)
+        self.image = Image(cannybf,cannygfp,image.name)
     
     def get_contours(self):
         # find contours
-        _, contoursbf, _ = cv2.findContours(self.image.read_bright_field(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-        _, contoursgfp, _ = cv2.findContours(self.image.read_gfp(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+        _, contoursbf, hierarchybf = cv2.findContours(self.image.read_bright_field(),cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
+        _, contoursgfp, hierarchygfp = cv2.findContours(self.image.read_gfp(),cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
 
-        return (contoursbf, contoursgfp)
+        return (contoursbf, contoursgfp, hierarchybf, hierarchygfp)

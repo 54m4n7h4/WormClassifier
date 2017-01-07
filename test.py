@@ -16,18 +16,20 @@ if not img is None:
     #Median Noise Reduction (blurring), using kernel size of 7
     reducedNoise = NoiseReducer(norm).median_reduction(7)
 
-    thresholded_img = Thresholder(reducedNoise).binary_threshold_inverse(50,255)
+    thresholded_img = Thresholder(reducedNoise).binary_threshold_inverse(75,255)
 
     outputimg = np.empty_like(thresholded_img.read_bright_field())
-    cannygfp = cv2.Canny(thresholded_img.read_bright_field(),50,200,3)
+    cannygfp = cv2.Canny(thresholded_img.read_bright_field(),50,255,1)
     
-    (bf_cntours, gfp_cntours) = ImageRegion(thresholded_img,50,255).get_contours()
-    print(len(bf_cntours))
-    print(bf_cntours)
-    cv2.drawContours(outputimg,bf_cntours,-1,(255,255,255),3)
+    (bf_cntours, gfp_cntours, hierbf, hiergfp) = ImageRegion(thresholded_img,75,255).get_contours()
+    print(hierbf[0])
+    print(len(gfp_cntours))
+    cv2.drawContours(outputimg,bf_cntours,-1,(255,255,255),1)
 
     # Output the bright fields
     cv2.imwrite("normalised.jpg", norm.read_gfp())
     cv2.imwrite("output.jpg",outputimg)
 else:
     print("No image file loaded")
+
+# todo: use hierarchy in contours to work out the smaller items
